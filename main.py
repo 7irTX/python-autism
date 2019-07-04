@@ -418,8 +418,8 @@ def main():
         #print(rank)
         
 def main2():
-        #my_list = class_init()
-        my_list = reshape_class_init()
+        my_list = class_init()
+        #my_list = reshape_class_init()
         #print(np.shape(my_list[1].features))
         uar = exhaustive_search(my_list)
         print(uar)
