@@ -1,0 +1,9 @@
+#config
+NUM_SPEAKERS = 67
+DEVEL = 819
+TEST = 820
+TRAIN = 903
+TYP = 1
+DYS = 2
+PDD = 3
+NOS = 4
