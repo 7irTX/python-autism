@@ -93,7 +93,7 @@ def dim_elimination(Features, labels):
         C_value = 1
         svc = SVC(kernel = ker, C = C_value)
         #rfe = RFE(estimator = svc, n_features_to_select = N_features, step = N_steps)
-        rfe = RFECV(estimator = svc, step = 1, cv = StratifiedKFold(n_splits = 5, shuffle = False), verbose = True)
+        rfe = RFECV(estimator = svc, step = 1, cv = StratifiedKFold(n_splits = 5, shuffle = False), verbose = False)
         #N_labels = np.shape(task)[1]
         #rfe = RFECV(estimator=svc, step=N_steps, cv=StratifiedKFold(2),scoring='accuracy')
         labels = binary_array(labels)
