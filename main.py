@@ -273,10 +273,16 @@ def exhaustive_search(my_list):
 #13/06 grouping features and labels to an array
 def class_init():
         tmp_list = []
+        '''
         path_label = "C:/Users/Yitian Chen.DESKTOP-TIIP443/Desktop/tmp1/training/result_csv/all_label.csv"
         path_result = "C:/Users/Yitian Chen.DESKTOP-TIIP443/Desktop/tmp1/training/result_csv/all_result.csv"
         path_speakerID = "C:/Users/Yitian Chen.DESKTOP-TIIP443/Desktop/UNSW_Thesis/ComParE2013_Autism/lab/ComParE2013_Autism.csv"
         path_gender = "C:/Users/Yitian Chen.DESKTOP-TIIP443/Desktop/UNSW_Thesis/ComParE2013_Autism/lab/gender_lable.csv"
+        '''
+        path_label = "./result_csv/all_label.csv"
+        path_result = "./result_csv/all_result.csv"
+        path_speakerID = "./lab/ComParE2013_Autism.csv"
+        path_gender = "./lab/gender_lable.csv"
         tmp_label = read(path_label)
         tmp_result = read(path_result)
         tmp_speaker = read(path_speakerID)
@@ -329,10 +335,16 @@ def select_best_features(features):
 
 def reshape_class_init():
         tmp_list = []
+        '''
         path_label = "C:/Users/Yitian Chen.DESKTOP-TIIP443/Desktop/tmp1/training/result_csv/all_label.csv"
         path_result = "C:/Users/Yitian Chen.DESKTOP-TIIP443/Desktop/tmp1/training/result_csv/all_result.csv"
         path_speakerID = "C:/Users/Yitian Chen.DESKTOP-TIIP443/Desktop/UNSW_Thesis/ComParE2013_Autism/lab/ComParE2013_Autism.csv"
         path_gender = "C:/Users/Yitian Chen.DESKTOP-TIIP443/Desktop/UNSW_Thesis/ComParE2013_Autism/lab/gender_lable.csv"
+        '''
+        path_label = "./result_csv/all_label.csv"
+        path_result = "./result_csv/all_result.csv"
+        path_speakerID = "./lab/ComParE2013_Autism.csv"
+        path_gender = "./lab/gender_lable.csv"
         tmp_label = read(path_label)
         tmp_result = read(path_result)
         tmp_speaker = read(path_speakerID)
