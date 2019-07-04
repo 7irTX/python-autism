@@ -518,7 +518,7 @@ def test_opt_problem():
                # print(speaker_IDs1, speaker_IDs2, L)
         #print(np.shape(gender1)[0])
         #print(train_genders)
-        #return 0
+        
 
 def ID2Index(id, ID):
         N = 67
