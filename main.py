@@ -40,7 +40,7 @@ speaker_list = []
 def prediction_svm(X_train,y_train,X_predict,y_actual,ker,ker_coee,C):
         #ker = 'linear'
         #clf = svm.SVC(gamma='auto',kernel = ker)
-        clf = svm.SVC(gamma = ker_coee, kernel = ker, C = C,verbose = True)
+        clf = svm.SVC(gamma = ker_coee, kernel = ker, C = C,verbose = False)
         #sklearn.model_selection.GridSearchCV
         clf.fit(X_train, np.ravel(y_train,order='C'))
         pred = clf.predict(X_predict)
