@@ -187,7 +187,7 @@ def merge_classes(matrix, indexes, N_times):
         
         return out
 
-def exhaustive_search(my_list):
+def exhaustive_search(train_class, test_class):
         kernel_coee = ['scale','auto','auto_deprecated']
         kernel = ["linear","rbf","sigmoid"]
         uars = []
@@ -198,12 +198,12 @@ def exhaustive_search(my_list):
         #indexes = [44,38,29,51,54,36,22,16,52,14,17,26,28,39,64,25,27,20,40,19,31,12,63,34,8,56,48,58,60,1,65,10,45,30,15,37,11,55,59,46,18,35,13,41,53,42,2,66,24,50,4,62,7,23,33,43,61,32,5,9,57,49,67,3,47,21,6]
         
         #best indexes
-        indexes = [54,38,10,40,1,46,67,39,29,13,2,16,11,43,65,41,25,21,59,24,49,3,37,62,15,64,9,20,6,55,31,30,34,8,53,44,63,4,19,60,14,26,36,58,17,23,48,35,12,47,42,22,5,18,45,27,52,28,33,7,56,66,32,57,51,50,61]
+        #indexes = [54,38,10,40,1,46,67,39,29,13,2,16,11,43,65,41,25,21,59,24,49,3,37,62,15,64,9,20,6,55,31,30,34,8,53,44,63,4,19,60,14,26,36,58,17,23,48,35,12,47,42,22,5,18,45,27,52,28,33,7,56,66,32,57,51,50,61]
         #combinations = [[1,2,3,4,5],[0,2,3,4,5],[0,1,3,4,5],[0,1,2,4,5],[0,1,2,3,5],[0,1,2,3,4]]
         #combinations = [[0,1,2,3],[0,1,2,4],[0,1,3,4],[1,2,3,4],[0,2,3,4]] #fold 5 leaves for testing
-        combinations = [[0,1,2,3,4]]
-        test_folds = 5
-        blocks = k_fold_division(my_list, indexes)
+        #combinations = [[0,1,2,3,4]]
+        #test_folds = 5
+        #blocks = k_fold_division(my_list, indexes)
 
         #test_set = np.array(test_set)
         #train_set = np.array(train_set)
@@ -250,10 +250,10 @@ def exhaustive_search(my_list):
                                 '''
                                 #print(C)
                                 for n in range(times): #refold my_list
-                                        test_class = blocks[5] #last fold for testing, others for training
-                                        train_class = []
+                                        #test_class = blocks[5] #last fold for testing, others for training
+                                        #train_class = []
                                         #train_class = merge_classes(blocks, combinations[n],times - 1)
-                                        train_class = merge_classes(blocks, combinations[n],test_folds)
+                                        #train_class = merge_classes(blocks, combinations[n],test_folds)
                                         train_features, train_labels, test_features, test_labels = group_features(train_class,test_class)
                                         train_labels = binary_array(train_labels)
                                         test_labels = binary_array(test_labels)
@@ -621,31 +621,34 @@ def main3():
 
         indexes = indexes4
         my_list = reorder_array(tmp_list, indexes)
-
         #choose 5 folds only
-        my_list = my_list[0:55]
-        #test list from 56 to 66
-        features, labels, null1, null2 = group_features(my_list, [])
-        #print(np.shape(test_labels))
-        ranking = dim_elimination(features, labels)
-        print(ranking)
-        '''
-        for i in range(4):
-                if(i == 0):
-                        indexes = indexes1
-                if(i == 1):
-                        indexes = indexes2
-                if(i == 2):
-                        indexes = indexes3
-                if(i == 3):
-                        indexes = indexes4
+        #my_list = my_list[0:55]
 
-                my_list = reorder_array(tmp_list, indexes)
-                features, labels, null1, null2 = group_features(my_list, [])
-                #print(np.shape(test_labels))
+        #train_class = merge_classes(blocks, combinations[n],test_folds)
+        split_list = k_fold_division(my_list, indexes)
+        combinations = [[1,2,3,4,5],[0,2,3,4,5],[0,1,3,4,5],[0,1,2,4,5],[0,1,2,3,5],[0,1,2,3,4]]
+        N_test = 6
+        num_blocks = 5
+        for n in range(N_test):
+                train_set = merge_classes(split_list, combinations[n], num_blocks)
+                test_set = split_list[n]
+                features, labels, null1, null2 = group_features(train_set,[])
                 ranking = dim_elimination(features, labels)
                 print(ranking)
-        '''
+                uar = exhaustive_search(train_set, test_set)
+                print(uar)
+
+
+
+        
+
+        #test list from 56 to 66
+        #features, labels, null1, null2 = group_features(my_list, [])
+        #print(np.shape(test_labels))
+        #ranking = dim_elimination(features, labels)
+        #print(ranking)
+        #uar = exhaustive_search(my_list)
+        #print(uar)
         '''
         issue: features are unequally spread out to different speakers, thus StraitKFold does not produce output in the
         desire distribution
@@ -680,6 +683,6 @@ def test4():
 #test_arr_correspond()
 #test_opt_problem()
 #test_validation()
-main2()
-#main3()
+#main2()
+main3()
 #test4()
